@@ -12,6 +12,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Service\" />
-    <Folder Include="Model\" />
   </ItemGroup>
 </Project>
