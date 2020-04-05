@@ -25,7 +25,7 @@ namespace CodeLibrary.Views
 
         private void BtAddNew_OnClick(object sender, RoutedEventArgs e)
         {
-
+            //labekkd 
         }
 
         private void BtUpDate_OnClick(object sender, RoutedEventArgs e)
