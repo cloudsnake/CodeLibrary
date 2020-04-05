@@ -1,4 +1,6 @@
-﻿using Prism.Mvvm;
+﻿using CodeLibrary.Data;
+using CodeLibrary.Model;
+using Prism.Mvvm;
 
 namespace CodeLibrary.ViewModels
 {
@@ -13,6 +15,8 @@ namespace CodeLibrary.ViewModels
 
         public MainWindowViewModel()
         {
+            var code = DataHelper.Instance.Current.Select<CodeDocument>();
+            var query = code.Where(t => t.Id > 0).ToList();
 
         }
     }
