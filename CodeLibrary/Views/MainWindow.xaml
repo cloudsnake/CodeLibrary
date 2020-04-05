@@ -27,7 +27,9 @@
         </ToolBar>
         <ContentControl prism:RegionManager.RegionName="ContentRegion" Grid.Row="1" Grid.Column="1"/>
         <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-                <StatusBarItem x:Name="LiveTimeLabel" Content="%TIME%" ></StatusBarItem>
+            <StatusBarItem x:Name="LiveTimeLabel" Content="%TIME%" ></StatusBarItem>
+            <Separator/>
+            <StatusBarItem x:Name="sbCount" Content="%COUNT%"></StatusBarItem>
         </StatusBar>
     </Grid>
 </Window>

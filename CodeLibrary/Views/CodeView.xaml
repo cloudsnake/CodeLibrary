@@ -4,6 +4,17 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Label Content="{Binding Title}"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Label Content="{Binding Info}"></Label>
+        </StackPanel>
+        <RichTextBox x:Name="richTextBox" Grid.Row="2" Background="Gray"></RichTextBox>
     </Grid>
 </UserControl>
