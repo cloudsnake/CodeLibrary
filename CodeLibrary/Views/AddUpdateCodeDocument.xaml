@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="CodeLibrary.Views.AddUpdateCodeDocument"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="80*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26"></RowDefinition>
+            <RowDefinition Height="26"></RowDefinition>
+            <RowDefinition Height="26"></RowDefinition>
+            <RowDefinition Height="26"></RowDefinition>
+            <RowDefinition Height="100*"></RowDefinition>
+            <RowDefinition Height="26"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Label Content="标题"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBox Text="{Binding Title}" Width="400" HorizontalAlignment="Left"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Label Content="语言 框架"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <Label Content="语言: "></Label>
+            <ComboBox Width="100" ItemsSource="{Binding Languages}" DisplayMemberPath ="Key" SelectedValuePath ="Value" SelectedValue="{Binding ProgrammingLanguageId}">
+            </ComboBox>
+            <Label Content="框架: "></Label>
+            <ComboBox Width="100" ItemsSource="{Binding ProgrammingTypes}" DisplayMemberPath ="Key" SelectedValuePath ="Value" SelectedValue="{Binding ProgrammingTypeId}">
+            </ComboBox>
+
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <Label Content="关键字"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBox Text="{Binding KeyWords}" Width="400" HorizontalAlignment="Left"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <Label Content="内容"></Label>
+        </StackPanel>
+        <RichTextBox x:Name="richTextBox" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Binding Datas}"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <StackPanel Grid.Row="5" Grid.Column="0">
+            <Button x:Name="btSave" Content="保存" Command="{Binding SaveCommand}"></Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

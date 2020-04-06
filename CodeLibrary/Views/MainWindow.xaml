@@ -12,15 +12,20 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="50" MaxWidth="300"></ColumnDefinition>
-            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <ToolBar x:Name="toolBar" Height="32" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <Button x:Name="btAddNew" Content="添加" Click="BtAddNew_OnClick"></Button>
+            <Button x:Name="btAddNew" Content="添加" Command="{Binding AddNewUpdate}"></Button>
             <Separator/>
             <Button x:Name="btUpDate" Content="编辑" Click="BtUpDate_OnClick"></Button>
             <Separator/>
             <Button x:Name="btDel" Content="删除" Click="BtDel_OnClick"></Button>
             <Separator/>
+            <ComboBox x:Name="cbSearchType" Width="60">
+                <ComboBoxItem Content="标题" IsSelected="True"></ComboBoxItem>
+                <ComboBoxItem Content="内容"></ComboBoxItem>
+                <ComboBoxItem Content="关键字"></ComboBoxItem>
+            </ComboBox>
             <TextBox x:Name="tbSearchText" Width="80"></TextBox>
             <Button x:Name="btSearch" Content="查询" Click="BtSearch_OnClick" ></Button>
             <Separator/>
