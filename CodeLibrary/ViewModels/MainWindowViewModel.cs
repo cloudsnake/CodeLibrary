@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CodeLibrary.Data;
 using CodeLibrary.Model;
@@ -23,6 +24,7 @@ namespace CodeLibrary.ViewModels
         public MainWindowViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
+            InitTreeView();
             AddNewUpdate = new DelegateCommand(OnAddUpdate);
             var code = DataHelper.Instance.Current.Select<CodeDocument>();
             var query = code.Where(t => t.Id > 0).ToList();
@@ -33,5 +35,37 @@ namespace CodeLibrary.ViewModels
             _regionManager.RegisterViewWithRegion("ContentRegion", typeof(AddUpdateCodeDocument));
 
         }
+        // Item的树形结构
+        private ObservableCollection<ItemTreeData> itemTreeDataList;
+        public ObservableCollection<ItemTreeData> ItemTreeDataList
+        {
+            get { return itemTreeDataList; }
+            set { SetProperty(ref itemTreeDataList, value); }
+        }
+
+        private void InitTreeView()
+        {
+            // 添加树形结构
+            ItemTreeData item = GetTreeData();
+            if (itemTreeDataList == null)
+            {
+                itemTreeDataList = new ObservableCollection<ItemTreeData>();
+            }
+            ItemTreeDataList.Clear();
+
+            ItemTreeDataList.Add(item);
+        }
+
+        private ItemTreeData GetTreeData()
+        {
+            var itd = new ItemTreeData();
+            itd.titleName = "C++";
+            itd.itemId = 0;
+            itd.itemParent = 0;
+
+            return itd;
+        }
+
+
     }
 }
