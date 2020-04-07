@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
+using CodeLibrary.Model;
+using CodeLibrary.ViewModels;
 
 namespace CodeLibrary.Views
 {
@@ -9,9 +13,13 @@ namespace CodeLibrary.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowViewModel model = null;
+
         public MainWindow()
         {
             InitializeComponent();
+            model = this.DataContext as MainWindowViewModel;
+            
             DispatcherTimer LiveTime = new DispatcherTimer();
             LiveTime.Interval = TimeSpan.FromSeconds(1);
             LiveTime.Tick += timer_Tick;
@@ -38,6 +46,18 @@ namespace CodeLibrary.Views
 
         private void BtSearch_OnClick(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void TvTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var treeView = sender as TreeView;
+            var seleced = treeView.SelectedItem as ItemTreeData;
+            if (seleced == null || seleced.itemId <= 0)
+            {
+                return;
+            }
+
+            model.ViewCode(seleced.itemId);
         }
     }
 }

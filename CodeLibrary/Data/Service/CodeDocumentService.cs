@@ -38,13 +38,23 @@ namespace CodeLibrary.Data.Service
             return result;
         }
 
-        public static async Task<List<string>> GetCodeDocumentTitlesByTitle(string titleName)
+        public static async Task<List<CodeDocument>> GetCodeDocumentTitlesByTitle(string titleName)
         {
             var entityRepository = DataHelper.Instance.Current.GetRepository<CodeDocument>();
-            var selectTask = entityRepository.Where(t => t.Title.Contains(titleName)).ToListAsync();
-            var list = await selectTask;
-            var result = list.Select(t => t.Title).ToList();
-            return result;
+            if (string.IsNullOrWhiteSpace(titleName))
+            {
+                var selectTask = entityRepository.Where(t => t.Deleted == false).OrderBy(t=>t.ProgrammingLanguageId).ToListAsync();
+                var list = await selectTask;
+                var result = list;
+                return result;
+            }
+            else
+            {
+                var selectTask = entityRepository.Where(t => t.Title.Contains(titleName) && t.Deleted == false).OrderBy(t => t.ProgrammingLanguageId).ToListAsync();
+                var list = await selectTask;
+                var result = list;
+                return result;
+            }
         }
 
         public static async Task<int> DeleteCodeDocument(CodeDocument codeDocument)

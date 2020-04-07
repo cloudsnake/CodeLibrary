@@ -7,11 +7,27 @@ using System.Windows.Documents;
 using CodeLibrary.Data.Service;
 using CodeLibrary.Helper;
 using CodeLibrary.Model;
+using Prism.Regions;
 
 namespace CodeLibrary.ViewModels
 {
-    public class AddUpdateCodeDocumentViewModel : BindableBase
+    public class AddUpdateCodeDocumentViewModel : BindableBase, INavigationAware
     {
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            var obj = navigationContext.Parameters["Id"];
+            var guid = obj.ToString();
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+        }
+
         public DelegateCommand SaveCommand { get; private set; }
 
         public AddUpdateCodeDocumentViewModel()

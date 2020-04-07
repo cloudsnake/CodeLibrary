@@ -16,7 +16,8 @@ namespace CodeLibrary
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterForNavigation<CodeView>();
+            containerRegistry.RegisterForNavigation<AddUpdateCodeDocument>();
         }
     }
 }

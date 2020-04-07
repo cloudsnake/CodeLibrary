@@ -6,7 +6,41 @@ using System.Text;
 namespace CodeLibrary.Helper
 {
     public static class EnumHelper
-    {
+    {   /// <summary>
+        /// 根据枚举的值获取枚举名称
+        /// </summary>
+        /// <typeparam name="T">枚举类型</typeparam>
+        /// <param name="value">枚举的值</param>
+        /// <returns></returns>
+        public static string GetEnumName<T>(this int value)
+        {
+            Type enumType = typeof(T);
+
+            string[] fieldstrs = Enum.GetNames(enumType); //获取枚举字段数组
+            foreach (var item in fieldstrs)
+            {
+                string description = string.Empty;
+                var field = enumType.GetField(item);
+                object[] arr = field.GetCustomAttributes(typeof(DescriptionAttribute), true); //获取属性字段数组
+                if (arr != null && arr.Length > 0)
+                {
+                    description = ((DescriptionAttribute)arr[0]).Description;   //属性描述
+                }
+                else
+                {
+                    description = item;  //描述不存在取字段名称
+                }
+
+                var _v = (int) Enum.Parse(enumType, item);
+                if (value == _v)
+                {
+                    return description;
+                }
+            }
+
+            return "No";
+        }
+
         /// <summary>
         /// 枚举转字典集合(Key是value,Value是description（如果不存在description 则是name）)
         /// </summary>
