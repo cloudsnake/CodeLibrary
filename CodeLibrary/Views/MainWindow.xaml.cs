@@ -47,17 +47,5 @@ namespace CodeLibrary.Views
         private void BtSearch_OnClick(object sender, RoutedEventArgs e)
         {
         }
-
-        private void TvTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var treeView = sender as TreeView;
-            var seleced = treeView.SelectedItem as ItemTreeData;
-            if (seleced == null || seleced.itemId <= 0)
-            {
-                return;
-            }
-
-            model.ViewCode(seleced.itemId);
-        }
     }
 }

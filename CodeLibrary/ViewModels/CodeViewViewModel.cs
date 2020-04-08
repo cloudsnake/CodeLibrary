@@ -10,20 +10,20 @@ namespace CodeLibrary.ViewModels
     public class CodeViewViewModel : BindableBase, INavigationAware
     {
 
-        private string _title;
-        private string _info;
+        private string _codeTitle;
+        private string _codeInfo;
         private string _data;
 
         public string CodeTitle
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get { return _codeTitle; }
+            set { SetProperty(ref _codeTitle, value); }
         }
 
         public string CodeInfo
         {
-            get { return _info; }
-            set { SetProperty(ref _info, value); }
+            get { return _codeInfo; }
+            set { SetProperty(ref _codeInfo, value); }
         }
 
         public string Data
