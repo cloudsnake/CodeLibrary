@@ -12,6 +12,12 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
+    
+//<i:EventTrigger EventName = "MouseDoubleClick" >
+//< prism:InvokeCommandAction Command = "{Binding DoubleClickCommand}"
+//CommandParameter="{Binding ElementName=tvTreeView,Path=SelectedItem}" />
+//</i:EventTrigger>
+
 namespace CodeLibrary.ViewModels
 {
     public class MainWindowViewModel : BindableBase
@@ -27,15 +33,31 @@ namespace CodeLibrary.ViewModels
         public DelegateCommand<ItemTreeData> SelectItemChangeCommand { get; private set; }
         public DelegateCommand RefreshCommand { get; private set; }
         public DelegateCommand AddNewUpdate { get; private set; }
+
+        public DelegateCommand<ItemTreeData> DoubleClickCommand { get; private set; }
         public MainWindowViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
             InitTreeView();
             AddNewUpdate = new DelegateCommand(OnAddUpdate);
             RefreshCommand = new DelegateCommand(OnRefresh);
+//            DoubleClickCommand = new DelegateCommand<ItemTreeData>(OnDoubleClick);
             SelectItemChangeCommand = new DelegateCommand<ItemTreeData>(OnSelectItem);
             var code = DataHelper.Instance.Current.Select<CodeDocument>();
             var query = code.Where(t => t.Id > 0).ToList();
+            
+        }
+
+        public void OnDoubleClick(ItemTreeData itemTreeData)
+        {
+            int ta = 00; 
+            if (itemTreeData == null || itemTreeData.itemId <= 0)
+            {
+                return;
+            }
+            var parameters = new NavigationParameters();
+            parameters.Add("Id", itemTreeData.itemId);
+            _regionManager.RequestNavigate("ContentRegion", "CodeView", parameters);
         }
 
         private void OnSelectItem(ItemTreeData itemTreeData)
@@ -46,9 +68,9 @@ namespace CodeLibrary.ViewModels
             }
             var parameters = new NavigationParameters();
             parameters.Add("Id", itemTreeData.itemId);
-
             _regionManager.RequestNavigate("ContentRegion", "CodeView", parameters);
         }
+
         private void OnRefresh()
         {
             InitTreeView();
@@ -57,10 +79,7 @@ namespace CodeLibrary.ViewModels
         {
             var parameters = new NavigationParameters();
             parameters.Add("Id", Guid.NewGuid().ToString());
-
             _regionManager.RequestNavigate("ContentRegion", "AddUpdateCodeDocument", parameters);
-
-           // _regionManager.RegisterViewWithRegion("ContentRegion", typeof(AddUpdateCodeDocument));
         }
         // Item的树形结构
         private ObservableCollection<ItemTreeData> itemTreeDataList;
@@ -106,20 +125,20 @@ namespace CodeLibrary.ViewModels
             }
 
         }
-        public void ViewCode(int id)
-        {            
-            //删除原有view
-            //if (_regionManager.Regions["ContentRegion"] != null)
-            //{
-            //    List<object> views = new List<object>(_regionManager.Regions["ContentRegion"].Views);
-            //    foreach (object view in views)
-            //    {
-            //        _regionManager.Regions["ContentRegion"].Remove(view);
-            //    }
-            //}
-            var parameters = new NavigationParameters();
-            parameters.Add("Id", id);
-            _regionManager.RequestNavigate("ContentRegion", "CodeView",parameters);
-        }
+        //public void ViewCode(int id)
+        //{            
+        //    //删除原有view
+        //    //if (_regionManager.Regions["ContentRegion"] != null)
+        //    //{
+        //    //    List<object> views = new List<object>(_regionManager.Regions["ContentRegion"].Views);
+        //    //    foreach (object view in views)
+        //    //    {
+        //    //        _regionManager.Regions["ContentRegion"].Remove(view);
+        //    //    }
+        //    //}
+        //    var parameters = new NavigationParameters();
+        //    parameters.Add("Id", id);
+        //    _regionManager.RequestNavigate("ContentRegion", "CodeView",parameters);
+        //}
     }
 }
