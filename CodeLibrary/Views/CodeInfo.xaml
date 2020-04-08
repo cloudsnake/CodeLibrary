@@ -1,7 +1,8 @@
 ﻿<UserControl x:Class="CodeLibrary.Views.CodeInfo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Grid.RowDefinitions>
@@ -15,6 +16,6 @@
         <StackPanel Grid.Row="1">
             <Label Content="{Binding CodeInfo}" HorizontalAlignment="Left"></Label>
         </StackPanel>
-        <TextBox x:Name="richTextBox" Grid.Row="2" Text="{Binding Data}" Background="Gray"></TextBox>
+        <xctk:RichTextBox x:Name="richTextBox" Grid.Row="2" Text="{Binding Data}" Background="Gray"></xctk:RichTextBox>
     </Grid>
 </UserControl>
