@@ -5,9 +5,9 @@ namespace CodeLibrary.Views
     /// <summary>
     /// Interaction logic for CodeView
     /// </summary>
-    public partial class CodeView : UserControl
+    public partial class CodeInfo : UserControl
     {
-        public CodeView()
+        public CodeInfo()
         {
             InitializeComponent();
         }

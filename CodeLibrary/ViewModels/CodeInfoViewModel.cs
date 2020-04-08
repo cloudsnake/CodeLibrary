@@ -3,11 +3,12 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodeLibrary.Data.Service;
 using Prism.Regions;
 
 namespace CodeLibrary.ViewModels
 {
-    public class CodeViewViewModel : BindableBase, INavigationAware
+    public class CodeInfoViewModel : BindableBase, INavigationAware
     {
 
         private string _codeTitle;
@@ -46,42 +47,29 @@ namespace CodeLibrary.ViewModels
             }
         }
 
-        public CodeViewViewModel()
+        public CodeInfoViewModel()
         {
-            //_title = Guid.NewGuid().ToString();
-            //_info = Guid.NewGuid().ToString();
-            //_data = Guid.NewGuid().ToString();
         }
 
-        //public void OnNavigatedTo(NavigationContext navigationContext)
-        //{
-        //    var id = navigationContext.Parameters["Id"].ToString();
-        //    if (!string.IsNullOrWhiteSpace(id))
-        //    {
-        //        int _id = 0;
-        //        int.TryParse(id, out _id);
-
-        //        CodeTitle = Guid.NewGuid().ToString();
-        //        CodeInfo = Guid.NewGuid().ToString();
-        //        Data = Guid.NewGuid().ToString();
-
-        //    }
-        //}
-        //public bool IsNavigationTarget(NavigationContext navigationContext)
-        //{
-        //    return true;
-
-        //}
-        //public void OnNavigatedFrom(NavigationContext navigationContext)
-        //{
-
-        //}
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var obj = navigationContext.Parameters["Id"];
             var sid = obj.ToString();
+            int _id = 0;
+            int.TryParse(sid, out _id);
+            if (_id > 0)
+            {
+                GetCodeInfo(_id);
+            }
         }
 
+        private async void GetCodeInfo(int id)
+        {
+           var dc =await CodeDocumentService.GetCodeDocumentById(id);
+           CodeTitle = dc.Title;
+           CodeInfo = dc.KeyWords;
+           Data = dc.Datas;
+        }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;

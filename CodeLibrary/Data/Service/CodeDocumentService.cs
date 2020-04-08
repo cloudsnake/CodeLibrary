@@ -37,6 +37,13 @@ namespace CodeLibrary.Data.Service
             var result = await selectTask;
             return result;
         }
+        public static async Task<CodeDocument> GetCodeDocumentById(int id)
+        {
+            var entityRepository = DataHelper.Instance.Current.GetRepository<CodeDocument>();
+            var selectTask = entityRepository.Where(t => t.Id == id).FirstAsync();
+            var result = await selectTask;
+            return result;
+        }
 
         public static async Task<List<CodeDocument>> GetCodeDocumentTitlesByTitle(string titleName)
         {

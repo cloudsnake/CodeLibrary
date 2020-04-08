@@ -45,20 +45,18 @@ namespace CodeLibrary.ViewModels
             SelectItemChangeCommand = new DelegateCommand<ItemTreeData>(OnSelectItem);
             var code = DataHelper.Instance.Current.Select<CodeDocument>();
             var query = code.Where(t => t.Id > 0).ToList();
-            
         }
 
-        public void OnDoubleClick(ItemTreeData itemTreeData)
-        {
-            int ta = 00; 
-            if (itemTreeData == null || itemTreeData.itemId <= 0)
-            {
-                return;
-            }
-            var parameters = new NavigationParameters();
-            parameters.Add("Id", itemTreeData.itemId);
-            _regionManager.RequestNavigate("ContentRegion", "CodeView", parameters);
-        }
+        //public void OnDoubleClick(ItemTreeData itemTreeData)
+        //{
+        //    if (itemTreeData == null || itemTreeData.itemId <= 0)
+        //    {
+        //        return;
+        //    }
+        //    var parameters = new NavigationParameters();
+        //    parameters.Add("Id", itemTreeData.itemId);
+        //    _regionManager.RequestNavigate("ContentRegion", "CodeInfo", parameters);
+        //}
 
         private void OnSelectItem(ItemTreeData itemTreeData)
         {
@@ -68,7 +66,7 @@ namespace CodeLibrary.ViewModels
             }
             var parameters = new NavigationParameters();
             parameters.Add("Id", itemTreeData.itemId);
-            _regionManager.RequestNavigate("ContentRegion", "CodeView", parameters);
+            _regionManager.RequestNavigate("ContentRegion", "CodeInfo", parameters);
         }
 
         private void OnRefresh()
