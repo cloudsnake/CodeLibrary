@@ -93,7 +93,7 @@ namespace CodeLibrary.ViewModels
             {
                 itemTreeDataList = new ObservableCollection<ItemTreeData>();
             }
-            ItemTreeDataList.Clear();
+            //if(ItemTreeDataList.Count> 0) ItemTreeDataList.Clear();
             GetTreeData();
         }
         private async void GetTreeData()
@@ -102,6 +102,7 @@ namespace CodeLibrary.ViewModels
 
             string _root = "";
             var rootChild = new ItemTreeData();
+            var _list = new List<ItemTreeData>();
 
             foreach (var s in list)
             {
@@ -111,7 +112,7 @@ namespace CodeLibrary.ViewModels
                     rootChild = new ItemTreeData();
                     rootChild.titleName = ss;
                     rootChild.itemId = 0;
-                    ItemTreeDataList.Add(rootChild);
+                    _list.Add(rootChild);
                     _root = ss;
                 }
                 var child = new ItemTreeData();
@@ -121,6 +122,7 @@ namespace CodeLibrary.ViewModels
 
 
             }
+            ItemTreeDataList = new ObservableCollection<ItemTreeData>(_list);
 
         }
         //public void ViewCode(int id)

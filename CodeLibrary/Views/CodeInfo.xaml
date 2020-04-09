@@ -8,14 +8,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="100*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Background="Gray">
-            <Label Content="{Binding CodeTitle}" HorizontalAlignment="Left"></Label>
+        <StackPanel Grid.Row="0" Background="Gainsboro">
+            <Label Content="{Binding CodeTitle}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <Label Content="{Binding CodeInfo}" HorizontalAlignment="Left"></Label>
+            <Label Content="{Binding CodeInfo}"  VerticalAlignment="Center" HorizontalAlignment="Left"></Label>
         </StackPanel>
-        <xctk:RichTextBox x:Name="richTextBox" Grid.Row="2" Text="{Binding Data}" Background="Gray"></xctk:RichTextBox>
+        <xctk:RichTextBox x:Name="richTextBox" FontSize="18" Grid.Row="2" Text="{Binding Data}" Background="Gainsboro" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"></xctk:RichTextBox>
     </Grid>
 </UserControl>

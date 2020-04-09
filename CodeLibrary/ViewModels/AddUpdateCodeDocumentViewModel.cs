@@ -50,6 +50,10 @@ namespace CodeLibrary.ViewModels
             cd.ProgrammingLanguageId = this._programmingLanguageId;
             cd.ProgrammingTypeId = this._programmingTypeId;
             await CodeDocumentService.InsertCodeDocument(cd);
+
+            this.Title = string.Empty;
+            this.Datas = string.Empty;
+            this.KeyWords = string.Empty;
         }
 
         private int _id;
