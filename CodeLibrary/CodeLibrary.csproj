@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <AssemblyName>CodeLibrary</AssemblyName>
+	  <PublishTrimmed>true</PublishTrimmed>
+	  <PublishReadyToRun>false</PublishReadyToRun>
+	  <PublishSingleFile>true</PublishSingleFile>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="ViewModels\TreeCodeDocumentViewModel.cs" />

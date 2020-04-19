@@ -18,21 +18,13 @@
         </Grid.ColumnDefinitions>
 
         <ToolBar x:Name="toolBar" Height="32" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <Button x:Name="btRefresh" Content="刷新" Command="{Binding RefreshCommand}"></Button>
+            <Button x:Name="btRefresh" Content="刷新" Width="60" Command="{Binding RefreshCommand}"></Button>
             <Separator/>
-            <Button x:Name="btAddNew" Content="添加" Command="{Binding AddNewUpdate}"></Button>
+            <Button x:Name="btAddNew" Content="添加" Width="60"  Command="{Binding AddNewUpdate}"></Button>
             <Separator/>
-            <Button x:Name="btUpDate" Content="编辑" Click="BtUpDate_OnClick"></Button>
+            <Button x:Name="btUpDate" Content="编辑" Width="60"  Command="{Binding UpdateCommand}" ></Button>
             <Separator/>
-            <Button x:Name="btDel" Content="删除" Click="BtDel_OnClick"></Button>
-            <Separator/>
-            <ComboBox x:Name="cbSearchType" Width="60">
-                <ComboBoxItem Content="标题" IsSelected="True"></ComboBoxItem>
-                <ComboBoxItem Content="内容"></ComboBoxItem>
-                <ComboBoxItem Content="关键字"></ComboBoxItem>
-            </ComboBox>
-            <TextBox x:Name="tbSearchText" Width="80"></TextBox>
-            <Button x:Name="btSearch" Content="查询" Click="BtSearch_OnClick" ></Button>
+            <Button x:Name="btDel" Content="删除" Width="60"  Command="{Binding DeleteCommand}"></Button>
             <Separator/>
         </ToolBar>
         <TreeView x:Name="tvTreeView" Grid.Row="1" Grid.Column="0" Margin="5" ItemsSource="{Binding ItemTreeDataList}">
@@ -52,7 +44,8 @@
         <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <StatusBarItem x:Name="LiveTimeLabel" Content="%TIME%" ></StatusBarItem>
             <Separator/>
-            <StatusBarItem x:Name="sbCount" Content="%COUNT%"></StatusBarItem>
+            <StatusBarItem Content="共计文档数："></StatusBarItem>
+            <StatusBarItem x:Name="sbCount" Content="{Binding CountDoc }"></StatusBarItem>
         </StatusBar>
     </Grid>
 </Window>

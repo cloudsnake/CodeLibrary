@@ -90,5 +90,13 @@ namespace CodeLibrary.Data.Service
             var result = list.Select(t => t.Title).ToList();
             return result;
         }
+
+        public static async Task<long> GetCodeDocumentCount()
+        {
+            var entityRepository = DataHelper.Instance.Current.GetRepository<CodeDocument>();
+            var selectTask = entityRepository.Where(t => t.Deleted == false).CountAsync();
+            var result = await selectTask;
+            return result;
+        }
     }
 }

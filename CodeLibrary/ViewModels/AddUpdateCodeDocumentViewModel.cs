@@ -16,9 +16,40 @@ namespace CodeLibrary.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var obj = navigationContext.Parameters["Id"];
-            var guid = obj.ToString();
+            if (obj == null)
+            {
+                return;
+            }
+            var sid = obj.ToString();
+            if (!int.TryParse(sid, out UpdateDocumentId))
+            {
+                return;
+            }
+
+            if (UpdateDocumentId <= 0)
+            {
+                return;
+            }
+            GetCodeDocumentById(UpdateDocumentId);
         }
 
+        private CodeDocument updateDocument = null;
+        private int UpdateDocumentId = 0;
+        private async void GetCodeDocumentById(int id)
+        {
+            var currentCodeDocument = await CodeDocumentService.GetCodeDocumentById(id);
+            if (currentCodeDocument != null )
+            {
+                updateDocument = currentCodeDocument;
+                Title = currentCodeDocument.Title;
+                Datas = currentCodeDocument.Datas;
+                ProgrammingLanguageId = currentCodeDocument.ProgrammingLanguageId;
+                ProgrammingTypeId = currentCodeDocument.ProgrammingTypeId;
+                KeyWords = currentCodeDocument.KeyWords;
+                UpdateDocumentId = currentCodeDocument.Id;
+                
+            }
+        }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
@@ -39,17 +70,33 @@ namespace CodeLibrary.ViewModels
 
         private async void OnSave()
         {
+            
             var cd = new CodeDocument();
+            if (UpdateDocumentId > 0)
+            {
+                cd.Id = UpdateDocumentId;
+            }
             cd.Title = this._title;
-            cd.CreatedUtc = DateTime.UtcNow;
             cd.Datas = this._datas;
             cd.Deleted = false;
             cd.KeyWords = this._keyWords;
+            if (UpdateDocumentId <= 0)
+            {
+                cd.CreatedUtc = DateTime.UtcNow;
+            }
             cd.LastUpdatedUtc = DateTime.UtcNow;
             cd.OtherTechniques = string.Empty;
             cd.ProgrammingLanguageId = this._programmingLanguageId;
             cd.ProgrammingTypeId = this._programmingTypeId;
-            await CodeDocumentService.InsertCodeDocument(cd);
+            if (UpdateDocumentId <= 0)
+            {
+                await CodeDocumentService.InsertCodeDocument(cd);
+            }
+            else
+            {
+                await CodeDocumentService.UpdateCodeDocument(cd);
+                UpdateDocumentId = 0;
+            }
 
             this.Title = string.Empty;
             this.Datas = string.Empty;
