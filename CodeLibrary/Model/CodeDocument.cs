@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FreeSql.DataAnnotations;
+﻿using FreeSql.DataAnnotations;
+using System;
 
 namespace CodeLibrary.Model
 {

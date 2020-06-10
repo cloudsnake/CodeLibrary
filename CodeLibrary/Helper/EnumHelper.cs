@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace CodeLibrary.Helper
 {
@@ -31,7 +30,7 @@ namespace CodeLibrary.Helper
                     description = item;  //描述不存在取字段名称
                 }
 
-                var _v = (int) Enum.Parse(enumType, item);
+                var _v = (int)Enum.Parse(enumType, item);
                 if (value == _v)
                 {
                     return description;

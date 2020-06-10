@@ -1,5 +1,5 @@
-﻿using Prism.Ioc;
-using CodeLibrary.Views;
+﻿using CodeLibrary.Views;
+using Prism.Ioc;
 using System.Windows;
 
 namespace CodeLibrary

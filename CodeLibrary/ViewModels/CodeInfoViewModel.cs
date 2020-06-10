@@ -1,11 +1,7 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using CodeLibrary.Data.Service;
+﻿using CodeLibrary.Data.Service;
 using CodeLibrary.Helper;
 using CodeLibrary.Model;
+using Prism.Mvvm;
 using Prism.Regions;
 
 namespace CodeLibrary.ViewModels
@@ -45,7 +41,7 @@ namespace CodeLibrary.ViewModels
             }
             set
             {
-                SetProperty(ref _id,value);
+                SetProperty(ref _id, value);
             }
         }
 
@@ -67,13 +63,13 @@ namespace CodeLibrary.ViewModels
 
         private async void GetCodeInfo(int id)
         {
-           var dc =await CodeDocumentService.GetCodeDocumentById(id);
-           CodeTitle = dc.Title;
-           //CodeInfo = dc.KeyWords;
-           string spl = EnumHelper.GetEnumName<ProgrammingLanguage>(dc.ProgrammingLanguageId);
-           string spt = EnumHelper.GetEnumName<ProgrammingType>(dc.ProgrammingTypeId);
-           CodeInfo = $"语言: {spl}   框架: {spt}     关键字: {dc.KeyWords}";
-           Data = dc.Datas;
+            var dc = await CodeDocumentService.GetCodeDocumentById(id);
+            CodeTitle = dc.Title;
+            //CodeInfo = dc.KeyWords;
+            string spl = EnumHelper.GetEnumName<ProgrammingLanguage>(dc.ProgrammingLanguageId);
+            string spt = EnumHelper.GetEnumName<ProgrammingType>(dc.ProgrammingTypeId);
+            CodeInfo = $"语言: {spl}   框架: {spt}     关键字: {dc.KeyWords}";
+            Data = dc.Datas;
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {

@@ -4,18 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <AssemblyName>CodeLibrary</AssemblyName>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	  <PublishSingleFile>true</PublishSingleFile>
 	  <PublishTrimmed>true</PublishTrimmed>
 	  <PublishReadyToRun>false</PublishReadyToRun>
-	  <PublishSingleFile>true</PublishSingleFile>
-	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="ViewModels\TreeCodeDocumentViewModel.cs" />
-    <Compile Remove="Views\TreeCodeDocument.xaml.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Remove="Views\TreeCodeDocument.xaml" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="4.6.79" />
     <PackageReference Include="FreeSql.Provider.Sqlite" Version="1.3.5" />

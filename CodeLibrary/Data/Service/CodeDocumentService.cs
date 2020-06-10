@@ -1,9 +1,8 @@
-﻿using System;
+﻿using CodeLibrary.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CodeLibrary.Model;
 
 namespace CodeLibrary.Data.Service
 {
@@ -50,7 +49,7 @@ namespace CodeLibrary.Data.Service
             var entityRepository = DataHelper.Instance.Current.GetRepository<CodeDocument>();
             if (string.IsNullOrWhiteSpace(titleName))
             {
-                var selectTask = entityRepository.Where(t => t.Deleted == false).OrderBy(t=>t.ProgrammingLanguageId).ToListAsync();
+                var selectTask = entityRepository.Where(t => t.Deleted == false).OrderBy(t => t.ProgrammingLanguageId).ToListAsync();
                 var list = await selectTask;
                 var result = list;
                 return result;

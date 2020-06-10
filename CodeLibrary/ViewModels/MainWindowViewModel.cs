@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Input;
-using CodeLibrary.Data;
+﻿using CodeLibrary.Data;
 using CodeLibrary.Data.Service;
 using CodeLibrary.Helper;
 using CodeLibrary.Model;
-using CodeLibrary.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-    
+
 //<i:EventTrigger EventName = "MouseDoubleClick" >
 //< prism:InvokeCommandAction Command = "{Binding DoubleClickCommand}"
 //CommandParameter="{Binding ElementName=tvTreeView,Path=SelectedItem}" />
@@ -80,7 +77,7 @@ namespace CodeLibrary.ViewModels
             {
                 return;
             }
-            var cd =await CodeDocumentService.GetCodeDocumentById(SelectedCodeId);
+            var cd = await CodeDocumentService.GetCodeDocumentById(SelectedCodeId);
             await CodeDocumentService.DeleteCodeDocument(cd);
             OnRefresh();
         }

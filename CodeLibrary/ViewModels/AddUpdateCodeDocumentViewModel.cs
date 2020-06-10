@@ -1,13 +1,11 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Documents;
-using CodeLibrary.Data.Service;
+﻿using CodeLibrary.Data.Service;
 using CodeLibrary.Helper;
 using CodeLibrary.Model;
+using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Regions;
+using System;
+using System.Collections.Generic;
 
 namespace CodeLibrary.ViewModels
 {
@@ -38,7 +36,7 @@ namespace CodeLibrary.ViewModels
         private async void GetCodeDocumentById(int id)
         {
             var currentCodeDocument = await CodeDocumentService.GetCodeDocumentById(id);
-            if (currentCodeDocument != null )
+            if (currentCodeDocument != null)
             {
                 updateDocument = currentCodeDocument;
                 Title = currentCodeDocument.Title;
@@ -47,7 +45,7 @@ namespace CodeLibrary.ViewModels
                 ProgrammingTypeId = currentCodeDocument.ProgrammingTypeId;
                 KeyWords = currentCodeDocument.KeyWords;
                 UpdateDocumentId = currentCodeDocument.Id;
-                
+
             }
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -70,7 +68,7 @@ namespace CodeLibrary.ViewModels
 
         private async void OnSave()
         {
-            
+
             var cd = new CodeDocument();
             if (UpdateDocumentId > 0)
             {

@@ -1,10 +1,7 @@
-﻿using System;
+﻿using CodeLibrary.ViewModels;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Threading;
-using CodeLibrary.Model;
-using CodeLibrary.ViewModels;
 
 namespace CodeLibrary.Views
 {
@@ -19,7 +16,7 @@ namespace CodeLibrary.Views
         {
             InitializeComponent();
             model = this.DataContext as MainWindowViewModel;
-            
+
             DispatcherTimer LiveTime = new DispatcherTimer();
             LiveTime.Interval = TimeSpan.FromSeconds(1);
             LiveTime.Tick += timer_Tick;
@@ -27,7 +24,7 @@ namespace CodeLibrary.Views
         }
         void timer_Tick(object sender, EventArgs e)
         {
-            LiveTimeLabel.Content ="当前时间: " +  DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            LiveTimeLabel.Content = "当前时间: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             model.GetDocumentCount();
         }
     }

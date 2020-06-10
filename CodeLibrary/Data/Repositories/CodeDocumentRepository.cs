@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-using CodeLibrary.Model;
+﻿using CodeLibrary.Model;
 using FreeSql;
 
 namespace CodeLibrary.Data.Repositories
@@ -12,7 +8,7 @@ namespace CodeLibrary.Data.Repositories
         public CodeDocumentRepository(IFreeSql fsql) : base(fsql, null, null)
         {
 
-            
+
         }
     }
 }
