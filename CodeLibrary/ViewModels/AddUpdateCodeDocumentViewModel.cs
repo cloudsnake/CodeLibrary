@@ -6,6 +6,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using ICSharpCode.AvalonEdit.Document;
 
 namespace CodeLibrary.ViewModels
 {
@@ -40,7 +41,8 @@ namespace CodeLibrary.ViewModels
             {
                 updateDocument = currentCodeDocument;
                 Title = currentCodeDocument.Title;
-                Datas = currentCodeDocument.Datas;
+                //Data = currentCodeDocument.Datas;
+                Document = new TextDocument(new StringTextSource(currentCodeDocument.Datas));
                 ProgrammingLanguageId = currentCodeDocument.ProgrammingLanguageId;
                 ProgrammingTypeId = currentCodeDocument.ProgrammingTypeId;
                 KeyWords = currentCodeDocument.KeyWords;
@@ -59,13 +61,22 @@ namespace CodeLibrary.ViewModels
 
         public DelegateCommand SaveCommand { get; private set; }
 
+        public DelegateCommand CleanCommand { get; private set; }
+
         public AddUpdateCodeDocumentViewModel()
         {
             SaveCommand = new DelegateCommand(OnSave);
+            CleanCommand = new DelegateCommand(OnClean);
+
             _languages = EnumHelper.EnumListDic<ProgrammingLanguage>("");
             _programmingTypes = EnumHelper.EnumListDic<ProgrammingType>("");
+            Document = new TextDocument(new StringTextSource(""));
         }
 
+        private void OnClean()
+        {
+            Document = new TextDocument(new StringTextSource(""));
+        }
         private async void OnSave()
         {
 
@@ -75,7 +86,7 @@ namespace CodeLibrary.ViewModels
                 cd.Id = UpdateDocumentId;
             }
             cd.Title = this._title;
-            cd.Datas = this._datas;
+            cd.Datas = this._document.Text;
             cd.Deleted = false;
             cd.KeyWords = this._keyWords;
             if (UpdateDocumentId <= 0)
@@ -97,7 +108,7 @@ namespace CodeLibrary.ViewModels
             }
 
             this.Title = string.Empty;
-            this.Datas = string.Empty;
+            this.Document = new TextDocument(new StringTextSource(""));
             this.KeyWords = string.Empty;
         }
 
@@ -118,12 +129,13 @@ namespace CodeLibrary.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private string _datas;
 
-        public string Datas
+        private TextDocument _document;
+
+        public TextDocument Document
         {
-            get { return _datas; }
-            set { SetProperty(ref _datas, value); }
+            get { return _document; }
+            set { SetProperty(ref _document, value); }
         }
 
         private string _keyWords;

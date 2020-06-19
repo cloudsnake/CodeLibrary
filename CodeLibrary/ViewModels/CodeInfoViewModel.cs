@@ -1,6 +1,8 @@
-﻿using CodeLibrary.Data.Service;
+﻿using System.Windows.Forms.VisualStyles;
+using CodeLibrary.Data.Service;
 using CodeLibrary.Helper;
 using CodeLibrary.Model;
+using ICSharpCode.AvalonEdit.Document;
 using Prism.Mvvm;
 using Prism.Regions;
 
@@ -45,8 +47,19 @@ namespace CodeLibrary.ViewModels
             }
         }
 
+        private TextDocument _document;
+
+        public TextDocument Document
+        {
+            get { return _document; }
+            set { SetProperty(ref _document, value); }
+        }
+
+
         public CodeInfoViewModel()
         {
+            Document = new TextDocument(new StringTextSource(""));
+
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -69,7 +82,12 @@ namespace CodeLibrary.ViewModels
             string spl = EnumHelper.GetEnumName<ProgrammingLanguage>(dc.ProgrammingLanguageId);
             string spt = EnumHelper.GetEnumName<ProgrammingType>(dc.ProgrammingTypeId);
             CodeInfo = $"语言: {spl}   框架: {spt}     关键字: {dc.KeyWords}";
-            Data = dc.Datas;
+            //Data = dc.Datas;
+            if (dc.Datas != null)
+            {
+                Document = new TextDocument(new StringTextSource(dc.Datas));
+            }
+
         }
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
