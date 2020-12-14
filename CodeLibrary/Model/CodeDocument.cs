@@ -1,5 +1,6 @@
 ﻿using FreeSql.DataAnnotations;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CodeLibrary.Model
 {
@@ -13,6 +14,7 @@ namespace CodeLibrary.Model
         public string OtherTechniques { get; set; }
         public DateTime CreatedUtc { get; set; }
         public DateTime LastUpdatedUtc { get; set; }
+        [Column(StringLength = -1)]
         public string Datas { get; set; }
         public string KeyWords { get; set; }
         public bool Deleted { get; set; }
